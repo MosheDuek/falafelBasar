@@ -26,7 +26,6 @@ const updateProductNoImg = (name,description,shortDescription,price,idProduct)=>
 const deleteProduct = (id)=>{
     return mysql.execute(`
     DELETE FROM products WHERE (idproducts = ?);
-
     `,[id])
 }
 
@@ -34,6 +33,10 @@ const getAllProducts = ()=>{
     return mysql.execute(`
     SELECT idproducts,name,short_description,img_link,price FROM products;
     `)
+}
+
+const getHomeProducts = ()=>{
+    return mysql.execute(`SELECT * FROM falafel_basar.products ORDER BY rand() LIMIT 0,6`)
 }
 
 const getProduct = (id)=>{
@@ -48,7 +51,17 @@ const updatePrice = (price,id)=>{
     `,[price,id])
 }
 
+const getNames = ()=>{
+    return mysql.execute(`SELECT idproducts,name FROM products`)
+}
 
+const getProductsCheapToExp = ()=>{
+    return mysql.execute(`SELECT * FROM products ORDER BY price`)
+}
+
+const getProductsExpToCheap = ()=>{
+    return mysql.execute(`SELECT * FROM products ORDER BY price DESC`)
+}
 
 module.exports = {
     insertProduct,
@@ -58,4 +71,8 @@ module.exports = {
     getProduct,
     updatePrice,
     updateProductNoImg,
+    getHomeProducts,
+    getNames,
+    getProductsCheapToExp,
+    getProductsExpToCheap
 }

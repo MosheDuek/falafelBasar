@@ -14,14 +14,19 @@ const chaeckIfAdminExist = ()=>{
     return mysql.execute(`SELECT * FROM admin`)
 }
 
-const updatePassword = (password,idadmin)=>{
-    return mysql.execute(`UPDATE admin SET hashed_password = ? WHERE (idadmin = ?);
-`,[password,idadmin])
+const updatePassword = (password,email)=>{
+    return mysql.execute(`UPDATE admin SET hashed_password = ? WHERE (email = ?);
+`,[password,email])
+}
+
+const updateAdminDetails = (name,email,phonenumber)=>{
+    return mysql.execute(`UPDATE admin SET name = ? , email = ? , phone_umber = ? , WHERE email = ?`,[name,email,phonenumber,email])
 }
 
 module.exports = {
     insertAdmin,
     getAdmin,
     updatePassword,
-    chaeckIfAdminExist
+    chaeckIfAdminExist,
+    updateAdminDetails
 }

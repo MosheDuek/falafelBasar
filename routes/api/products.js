@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const authAdmin = require("../../middleware/admin.auth")
-const { getAllProducts, getProduct, deleteProduct, updatePrice, insertProduct, updateProduct, updateProductNoImg } = require('../../models/products')
+const { getAllProducts, getProduct, deleteProduct, updatePrice, insertProduct, updateProduct, updateProductNoImg, getHomeProducts, getNames, getProductsCheapToExp, getProductsExpToCheap } = require('../../models/products')
 const { validateDeleteOrGetSchema, validateUpdatePriceSchema, validateInsertOrUpdatateProductSchema } = require('../../validation/products.validation')
 const fs = require("fs").promises;
 const multer = require("../../config/multerTypes");
@@ -17,7 +17,6 @@ router.post("/",authAdmin,uploadMulter.single("prudImg"),async(req,res)=>{
         res.end()
     }
     catch(err){
-        console.log(err);
         if(req.file){
         fs.unlink(req.file.path)
         }
@@ -39,7 +38,6 @@ router.put("/:idProduct",authAdmin,uploadMulter.single("prudImg"),async(req,res)
          res.end()
     }
     catch(err){
-        console.log(err);
         res.status(400).json(err)
     }
     
@@ -77,6 +75,47 @@ router.get("/",async(req,res)=>{
     }
 })
 
+router.get("/cheap-to-exp",async(req,res)=>{
+    try{
+        const [products] = await getProductsCheapToExp()
+        res.json(products)
+    }
+    catch(err){
+        res.status(400).json(err)
+    }
+})
+
+router.get("/exp-to-cheap",async(req,res)=>{
+    try{
+        const [products] = await getProductsExpToCheap()
+        res.json(products)
+    }
+    catch(err){
+        res.status(400).json(err)
+    }
+})
+
+router.get("/home",async(req,res)=>{
+     try{
+        const [products] = await getHomeProducts()
+        res.json(products)
+    }
+    catch(err){
+        res.status(400).json(err)
+    }
+})
+
+router.get("/names",async(req,res)=>{
+    try{
+        const [names] = await getNames()
+        res.json(names)
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json(err)
+    }
+})
+
 router.get("/:idProduct",async(req,res)=>{
      try{
         await validateDeleteOrGetSchema({idProduct:req.params.idProduct})
@@ -87,4 +126,5 @@ router.get("/:idProduct",async(req,res)=>{
         res.status(400).json(err)
     }
 })
+
 module.exports = router

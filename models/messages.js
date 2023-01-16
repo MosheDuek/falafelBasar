@@ -13,7 +13,11 @@ limit ?,20`,[limit])
 }
 
 const getAmount = ()=>{
-    return mysql.execute('SELECT COUNT(idmessages) AS amount FROM messages')
+    return mysql.execute(`SELECT COUNT(idmessages) AS amount FROM messages`)
+}
+
+const getUnreadMessagesAmount = ()=>{
+    return mysql.execute(`SELECT COUNT(idmessages) AS amount FROM messages WHERE watched = '0'`)
 }
 
 const setWatched = (id)=>{
@@ -25,5 +29,6 @@ module.exports = {
     sendMessage,
     getMessages,
     getAmount,
+    getUnreadMessagesAmount,
     setWatched
 }

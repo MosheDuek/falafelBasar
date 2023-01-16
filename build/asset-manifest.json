@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ca022519.css",
+    "main.js": "/static/js/main.c334ae5f.js",
+    "static/js/787.22edae46.chunk.js": "/static/js/787.22edae46.chunk.js",
+    "static/media/Karantina-Regular.ttf": "/static/media/Karantina-Regular.9844915e3fa387c180fe.ttf",
+    "index.html": "/index.html",
+    "main.ca022519.css.map": "/static/css/main.ca022519.css.map",
+    "main.c334ae5f.js.map": "/static/js/main.c334ae5f.js.map",
+    "787.22edae46.chunk.js.map": "/static/js/787.22edae46.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca022519.css",
+    "static/js/main.c334ae5f.js"
+  ]
+}

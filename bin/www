@@ -81,7 +81,7 @@ function onError(error) {
  */
 
 function onListening() {
-  console.log(`server is listening on ${process.env.DOMAIN}${process.env.PORT}`);
+  console.log(`server is listening on http://localhost:${process.env.PORT}`);
   const addr = server.address();
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr

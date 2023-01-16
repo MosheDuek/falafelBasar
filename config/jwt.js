@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const generateToken = (data) => {
     return new Promise((res, rej) => {
         jwt.sign(data, process.env.JWT_KEY, {
-            expiresIn: "72h"
+            expiresIn: `${data.izAdmin?"4h":"72h"}`
         }, (err, token) => {
             if (err) rej(err)
             else res(token)
